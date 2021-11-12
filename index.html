@@ -49,7 +49,7 @@
                     <form role="form" class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <label class="custom-control red-checkbox">
-                                <input type="checkbox" class="fill-control-input">
+                                <input type="checkbox" class="fill-control-input" id="LED1" onclick="myFunction()">
                                 <span class="fill-control-indicator"></span>
                                 <span class="fill-control-description">1</span>
                             </label>
@@ -231,5 +231,9 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Firebase JS DB  -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="./firebase.js"></script>
 
 </html>

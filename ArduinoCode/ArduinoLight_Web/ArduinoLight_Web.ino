@@ -1,50 +1,68 @@
 #include <ESP8266WiFi.h>
-#include <FirebaseESP8266.h>
+#include <FirebaseArduino.h>
 
+// Set these to run example.
 #define FIREBASE_HOST "light-web-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "tmYp0qOFElT0wfeRfwjMeDrV92TK27OwoImNzleX"
 #define WIFI_SSID "Avi"
 #define WIFI_PASSWORD "7071955977@"
+#define LED D2
 
-FirebaseData fbdo;
-
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println();
-
+void setup() {
+  
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+  // connect to wifi.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Connecting to Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  Serial.print("connecting");
+  while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
-    delay(300);
+    delay(500);
   }
   Serial.println();
-  Serial.print("Connected with IP: ");
+  Serial.print("connected: ");
   Serial.println(WiFi.localIP());
-  Serial.println();
-
+  
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
-
-  fbdo.setBSSLBufferSize(1024, 1024);
-  fbdo.setResponseSize(1024);
-
-  Serial.println("Set Timestamp test...");
 }
 
-void loop()
-{
-  //Also can use Firebase.set instead of Firebase.setDouble
-  Firebase.setDouble(fbdo,"currentWeather/humidity", 100);
-  Firebase.setInt(fbdo,"currentWeather/temperature", 23);
-  Firebase.setFloat(fbdo,"currentWeather/fahrenheit", 2323);
-  Firebase.setTimestamp(fbdo,"currentWeather/date");
-//  Serial.println(Firebase.getInt(fbdo,"currentWeather/fahrenheit"));
-  String getData = Firebase.getString(fbdo,"LEDStat/Stat");
-   Serial.println(getData);
-  delay(1000);
 
+void loop() {
+
+  int val = Firebase.getInt("LED");
+  Serial.print("LED : ");
+  Serial.print(val);
+  if(val == 1){
+  digitalWrite(LED, HIGH);  
+  delay(1000);
+  }
+  if(val == 0) {
+  digitalWrite(LED, LOW);    
+  delay(1000); 
+  }
+//  
+//  // set value
+//  Firebase.setFloat("number", 42.0);
+//  // handle error
+//  if (Firebase.failed()) {
+//      Serial.print("setting /number failed:");
+//      Serial.println(Firebase.error());  
+//      return;
+//  }
+//  delay(1000);
+//
+//  // get value 
+//  Serial.print("number: ");
+//  Serial.println(Firebase.getFloat("number"));
+//  delay(1000);
+//  
+//  // set bool value
+//  Firebase.setBool("truth", false);
+//  // handle error
+//  if (Firebase.failed()) {
+//      Serial.print("setting /truth failed:");
+//      Serial.println(Firebase.error());  
+//      return;
+//  }
+//  delay(1000);
 }
