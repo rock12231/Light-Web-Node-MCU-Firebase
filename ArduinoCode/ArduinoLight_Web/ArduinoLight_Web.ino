@@ -37,43 +37,14 @@ void setup()
 
 void loop()
 {
-  
   //Also can use Firebase.set instead of Firebase.setDouble
   Firebase.setDouble(fbdo,"currentWeather/humidity", 100);
-  Firebase.setFloat(fbdo,"currentWeather/temperature", 23);
+  Firebase.setInt(fbdo,"currentWeather/temperature", 23);
   Firebase.setFloat(fbdo,"currentWeather/fahrenheit", 2323);
   Firebase.setTimestamp(fbdo,"currentWeather/date");
+//  Serial.println(Firebase.getInt(fbdo,"currentWeather/fahrenheit"));
+  String getData = Firebase.getString(fbdo,"LEDStat/Stat");
+   Serial.println(getData);
   delay(1000);
-//  if (Firebase.setTimestamp(fbdo,"Date/Set/Timestamp"))
-//  {
-//    Serial.println("PASSED");
-//    Serial.println("PATH: " + fbdo.dataPath());
-//    Serial.println("TYPE: " + fbdo.dataType());
-//
-//    //Timestamp saved in millisecond, get its seconds from intData()
-//    Serial.print("TIMESTAMP (Seconds): ");
-//    Serial.println(fbdo.intData());
-//
-//    //Or print the total milliseconds from doubleData()
-//    //Due to bugs in Serial.print in Arduino library, use printf to print double instead.
-//    printf("TIMESTAMP (milliSeconds): %.0lf\n", fbdo.doubleData());
-//
-//    //Or print it from payload directly
-//    Serial.print("TIMESTAMP (milliSeconds): ");
-//    Serial.println(fbdo.payload());
-//
-//    //Due to some internal server error, ETag cannot get from setTimestamp
-//    //Try to get ETag manually
-//    //Serial.println("ETag: " + Firebase.getETag(fbdo, "/Set/Timestamp"));
-//    Serial.println("------------------------------------");
-//    Serial.println();
-//  }
-//  else
-//  {
-//    Serial.println("FAILED");
-//    Serial.println("REASON: " + fbdo.errorReason());
-//    Serial.println("------------------------------------");
-//    Serial.println();
-//  }
 
 }
