@@ -12,12 +12,20 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 function myFunction() {
-    var checkBox = document.getElementById("LED1");
-    if (checkBox.checked == true) {
+    var checkBox1 = document.getElementById("LED1");
+    if (checkBox1.checked == true) {
         console.log("ON")
-        database.ref('LED').set(1);
+        database.ref('LED1').set(1);
     } else {
         console.log("OFF")
-        database.ref('LED').set(0);
+        database.ref('LED1').set(0);
+    }
+    var checkBox2 = document.getElementById("LED2");
+    if (checkBox2.checked == true) {
+        console.log("ON")
+        database.ref('LED2').set(1);
+    } else {
+        console.log("OFF")
+        database.ref('LED2').set(0);
     }
 }

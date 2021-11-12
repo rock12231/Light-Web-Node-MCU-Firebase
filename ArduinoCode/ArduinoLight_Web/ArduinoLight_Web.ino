@@ -6,12 +6,13 @@
 #define FIREBASE_AUTH "tmYp0qOFElT0wfeRfwjMeDrV92TK27OwoImNzleX"
 #define WIFI_SSID "Avi"
 #define WIFI_PASSWORD "7071955977@"
-#define LED D2
-
+#define LED1 D2
+#define LED2 D3
 void setup() {
   
   Serial.begin(9600);
-  pinMode(LED, OUTPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
   // connect to wifi.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
@@ -29,16 +30,24 @@ void setup() {
 
 void loop() {
 
-  int val = Firebase.getInt("LED");
-  Serial.print("LED : ");
-  Serial.print(val);
-  if(val == 1){
-  digitalWrite(LED, HIGH);  
-  delay(1000);
+  int val1 = Firebase.getInt("LED1");
+  int val2 = Firebase.getInt("LED2");
+  Serial.print("LED1 : ");
+  Serial.print(val1);
+  Serial.print("LED2 : ");
+  Serial.println(val2);
+  
+  if(val1 == 1){
+  digitalWrite(LED1, HIGH);  
   }
-  if(val == 0) {
-  digitalWrite(LED, LOW);    
-  delay(1000); 
+  if(val1 == 0) {
+  digitalWrite(LED1, LOW);    
+  }
+   if(val2 == 1){
+  digitalWrite(LED2, HIGH);  
+  }
+  if(val2 == 0) {
+  digitalWrite(LED2, LOW);     
   }
 //  
 //  // set value
